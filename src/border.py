@@ -8,4 +8,7 @@ async def main():
     pages = await browser.pages()
     await pages[-1].goto('http://game.granbluefantasy.jp/#authentication', waitUntill=['domcontentloaded'])
 
+    await pages[-1].waitForSelector('#mobage-login')
+    await pages[-1].click('#mobage-login')
+
 asyncio.get_event_loop().run_until_complete(main())
