@@ -18,15 +18,22 @@ async def login(pages):
     await pages.click('#login')
 
 
+async def close_login_tab(pages):
+    await pages.waitForSelector('#notify-response-button')
+    await pages.click('#notify-response-button')
+
+
 async def main():
     browser = await connect(browserWSEndpoint='ws://host.docker.internal:9222/devtools/browser/6dbbf347-a599-473c-a8cc-24fdd1aa3aad')
 
     pages = await browser.pages()
     await transition_to_login(pages[-1])
-    
+
     await pages[-1].waitFor(1000)
 
     pages = await browser.pages()
     await login(pages[-1])
+
+    await close_login_tab(pages[-1])
 
 asyncio.get_event_loop().run_until_complete(main())
