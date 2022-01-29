@@ -1,12 +1,15 @@
 import asyncio
 from pyppeteer import connect
+import os
+from dotenv import load_dotenv
 
 from login import *
 from border import *
 
 
 async def main():
-    browser = await connect(browserWSEndpoint='ws://host.docker.internal:9222/devtools/browser/6dbbf347-a599-473c-a8cc-24fdd1aa3aad')
+    load_dotenv('.env')
+    browser = await connect(browserWSEndpoint=os.environ.get('BROWSER_WS_ENDPOINT'))
 
     pages = await browser.pages()
     await transition_to_login(pages[-1])

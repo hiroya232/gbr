@@ -1,5 +1,4 @@
 import os
-from dotenv import load_dotenv
 
 
 async def transition_to_login(pages):
@@ -9,7 +8,6 @@ async def transition_to_login(pages):
 
 
 async def login(pages):
-    load_dotenv('.env')
     await pages.type('#subject-id', os.environ.get('MOBAGE_ID'))
     await pages.type('#subject-password', os.environ.get('MOBAGE_PASSWORD'))
     await pages.waitFor(1000)
