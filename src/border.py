@@ -23,6 +23,15 @@ async def close_login_tab(pages):
     await pages.click('#notify-response-button')
 
 
+async def get_ranking_border(pages):
+    await pages.goto('http://game.granbluefantasy.jp/#event/teamraid060/ranking')
+
+    total_records = await pages.querySelectorAll('.txt-total-record')
+    for total_record in total_records:
+        total_record = await pages.evaluate('(total_record) => total_record.textContent', total_record)
+        print(total_record)
+
+
 async def main():
     browser = await connect(browserWSEndpoint='ws://host.docker.internal:9222/devtools/browser/6dbbf347-a599-473c-a8cc-24fdd1aa3aad')
 
@@ -35,5 +44,10 @@ async def main():
     await login(pages[-1])
 
     await close_login_tab(pages[-1])
+
+    await pages[-1].waitFor(1000)
+
+    pages = await browser.pages()
+    await get_ranking_border(pages[-1])
 
 asyncio.get_event_loop().run_until_complete(main())
