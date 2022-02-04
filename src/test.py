@@ -1,6 +1,5 @@
 import sys
-from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy import Column, Integer, String, Float, DateTime
+from sqlalchemy import Column, Integer, String
 from setting import Base
 from setting import ENGINE
 
