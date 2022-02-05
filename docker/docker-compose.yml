@@ -1,4 +1,4 @@
-version: '3'
+version: "3"
 
 services:
   app:
@@ -6,7 +6,14 @@ services:
     container_name: python
     tty: true
     volumes:
-      - ../src:/src
+      - ../:/workspace
+      - ~/.zshrc-docker:/root/.zshrc
+      - ~/.zlogin:/root/.zlogin
+      - ~/.zprofile:/root/.zprofile
+      - ~/.zenv:/root/.zenv
+      - ~/.gitconfig:/root/.gitconfig
+      - ~/.commit_template:/root/.commit_template
+      - ~/.ssh/id_rsa_github:/root/.ssh/id_rsa_github
 
   db:
     build: ./mysql
