@@ -1,7 +1,16 @@
+import contribution
+
 async def get_ranking_border(pages):
     await pages.goto('http://game.granbluefantasy.jp/#event/teamraid060/ranking')
 
-    total_records = await pages.querySelectorAll('.txt-total-record')
-    for total_record in total_records:
+    total_record_list = await pages.querySelectorAll('.txt-total-record')
+
+    evaluated_total_record_list = []
+    for i, total_record in enumerate(total_record_list):
         total_record = await pages.evaluate('(total_record) => total_record.textContent', total_record)
-        print(total_record)
+
+        # 貢献度だけを抽出
+        if i % 2 != 0:
+            evaluated_total_record_list.append(total_record.strip())
+
+    contribution.insert(evaluated_total_record_list)
