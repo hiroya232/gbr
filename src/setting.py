@@ -1,8 +1,10 @@
 import os
+from dotenv import load_dotenv
 from sqlalchemy import *
 from sqlalchemy.orm import *
 from sqlalchemy.ext.declarative import declarative_base
 
+load_dotenv('../.env')
 
 DATABASE = 'mysql+mysqldb://%s:%s@%s/%s?charset=utf8' % (
     os.environ.get('MYSQL_USER'),
