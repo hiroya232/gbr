@@ -10,3 +10,11 @@ RUN apt-get update \
 
 RUN apt-get install -y zsh vim zsh-autosuggestions zsh-syntax-highlighting \
     && chsh -s /bin/zsh
+
+RUN apt-get install -y gettext libcurl4-gnutls-dev libexpat1-dev libghc-zlib-dev libssl-dev make \
+    && wget https://github.com/git/git/archive/v2.35.1.tar.gz \
+    && tar -xzf v2.35.1.tar.gz \
+    && cd git-* \
+    && make prefix=/usr/local all \
+    && make prefix=/usr/local install \
+    && rm -rf git-2.35.1*
