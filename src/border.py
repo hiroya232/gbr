@@ -1,3 +1,5 @@
+from fastapi import FastAPI
+
 import contribution
 
 async def get_ranking_border(pages):
@@ -14,3 +16,10 @@ async def get_ranking_border(pages):
             evaluated_total_record_list.append(total_record.strip())
 
     contribution.insert(evaluated_total_record_list)
+
+app = FastAPI()
+
+@app.get('/border')
+def getBorderContribution():
+    borderContibution = contribution.fetchAll()
+    return borderContibution

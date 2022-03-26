@@ -1,5 +1,5 @@
 import sys
-from sqlalchemy import Column, Integer, String, DateTime
+from sqlalchemy import Column, Integer, String, DateTime, desc
 from datetime import datetime
 from sqlalchemy.sql.functions import current_timestamp
 from setting import Base, ENGINE, session
@@ -18,6 +18,23 @@ class Contribution(Base):
     rank_180000 = Column('rank_180000', String(100))
     rank_270000 = Column('rank_270000', String(100))
     rank_370000 = Column('rank_370000', String(100))
+
+def fetchAll():
+    result = session.query(Contribution).order_by(desc(Contribution.created_at)).limit(1)[0]
+    return {
+        "id": result.id,
+        "created_at": result.created_at,
+        "updated_at": result.updated_at,
+        "rank_1": result.rank_1,
+        "rank_2": result.rank_2,
+        "rank_3": result.rank_3,
+        "rank_2000": result.rank_2000,
+        "rank_80000": result.rank_80000,
+        "rank_140000": result.rank_140000,
+        "rank_180000": result.rank_180000,
+        "rank_270000": result.rank_270000,
+        "rank_370000": result.rank_370000,
+    }
 
 def insert(rank_border_list):
     contribution = Contribution(
