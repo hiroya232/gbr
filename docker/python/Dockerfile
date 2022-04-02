@@ -11,7 +11,7 @@ RUN apt-get update \
 RUN apt-get install -y zsh vim zsh-autosuggestions zsh-syntax-highlighting \
     && chsh -s /bin/zsh
 
-RUN apt-get install -y gettext libcurl4-gnutls-dev libexpat1-dev libghc-zlib-dev libssl-dev make \
+RUN apt-get install -y gettext libcurl4-gnutls-dev libexpat1-dev libghc-zlib-dev libssl-dev make less \
     && wget https://github.com/git/git/archive/v2.35.1.tar.gz \
     && tar -xzf v2.35.1.tar.gz \
     && cd git-* \
