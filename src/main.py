@@ -18,7 +18,7 @@ def run_threaded(job_func):
     job_thread.start()
 
 async def main():
-    load_dotenv('.env')
+    load_dotenv('/workspace/.env')
     browser = await connect(browserWSEndpoint=os.environ.get('BROWSER_WS_ENDPOINT'))
 
     pages = await browser.pages()
